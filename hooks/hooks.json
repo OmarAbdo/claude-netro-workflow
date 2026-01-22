@@ -26,7 +26,18 @@
       "hooks": [
         {
           "type": "prompt",
-          "prompt": "Context is about to be compacted. CRITICAL: Save state before compaction.\n\n1. **Save to memory**:\n   - Current task description\n   - Progress: completed, in-progress, remaining todos\n   - Key files that were read/modified\n   - Key decisions made\n   - Resume instructions (be specific about next steps)\n\n2. **Format for .claude/memory/session-state.json**\n\n3. **Also save human-readable .claude/memory/task-context.md**\n\nThis ensures work can continue after compaction.\n\nRespond {\"ok\": true} after mentally noting what to save.",
+          "prompt": "Context is about to be compacted at 90% threshold. CRITICAL: Save state NOW.\n\n**IMMEDIATELY save these files:**\n\n1. **Save .claude/memory/session-state.json** with:\n   - Current task description\n   - Progress: completed, in-progress, remaining todos (from TodoWrite)\n   - Key files read/modified this session\n   - Key decisions made\n   - SPECIFIC resume instructions (what to do next)\n\n2. **Save .claude/memory/task-context.md** (human-readable version)\n\n3. **Create .claude/pending-restore** flag file (empty file, signals auto-restore needed)\n\nThis is your LAST CHANCE to save state before compaction. Be thorough.\n\nAfter saving, respond {\"ok\": true}.",
+          "timeout": 45
+        }
+      ]
+    }
+  ],
+  "UserPromptSubmit": [
+    {
+      "hooks": [
+        {
+          "type": "prompt",
+          "prompt": "Check if .claude/pending-restore file exists (signals post-compaction restore needed).\n\nIf the file EXISTS:\n1. Read .claude/memory/session-state.json\n2. Display restored context to user:\n   - Task: [description]\n   - Progress: X completed, Y remaining\n   - Resume: [instructions]\n3. Restore todos from saved progress using TodoWrite\n4. DELETE the .claude/pending-restore file\n5. Respond {\"ok\": true, \"restored\": true}\n\nIf the file does NOT exist:\n- Respond {\"ok\": true} silently (no restoration needed)\n\nThis enables seamless continuation after context compaction.",
           "timeout": 30
         }
       ]
