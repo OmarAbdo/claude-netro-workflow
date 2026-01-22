@@ -1,6 +1,6 @@
 # Netro - Universal Claude Code Workflow Orchestrator
 
-[![Claude Code Plugin](https://img.shields.io/badge/Claude%20Code-Plugin-blueviolet)](https://github.com/OmarAbdo/netro)
+[![Claude Code Plugin](https://img.shields.io/badge/Claude%20Code-Plugin-blueviolet)](https://github.com/OmarAbdo/claude-netro-workflow)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A comprehensive Claude Code plugin that provides:
@@ -16,7 +16,7 @@ A comprehensive Claude Code plugin that provides:
 
 ```bash
 # Add the marketplace
-/plugin marketplace add OmarAbdo/netro
+/plugin marketplace add OmarAbdo/claude-netro-workflow
 
 # Install netro
 /plugin install netro
@@ -26,7 +26,7 @@ A comprehensive Claude Code plugin that provides:
 
 1. Clone to your plugins directory:
 ```bash
-git clone https://github.com/OmarAbdo/netro.git ~/.claude/plugins/netro
+git clone https://github.com/OmarAbdo/claude-netro-workflow.git ~/.claude/plugins/netro
 ```
 
 2. Enable in `~/.claude/settings.json`:

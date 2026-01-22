@@ -7,7 +7,7 @@
       "description": "Universal Claude Code workflow orchestrator with completion enforcement, memory persistence, continuous execution, and bundled development plugins (TDD, code review, git workflows).",
       "version": "1.0.0",
       "author": "Omar Abdo",
-      "repository": "https://github.com/OmarAbdo/netro",
+      "repository": "https://github.com/OmarAbdo/claude-netro-workflow",
       "path": ".",
       "keywords": [
         "workflow",
