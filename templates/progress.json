@@ -1,0 +1,28 @@
+{
+  "_comment": "Copy this file to .claude/progress.json when starting complex tasks",
+  "task": "DESCRIBE THE TASK HERE",
+  "started_at": "",
+  "status": "in_progress",
+  "requirements": [
+    {
+      "id": 1,
+      "description": "First requirement",
+      "status": "pending",
+      "verification": "How to verify this is done"
+    },
+    {
+      "id": 2,
+      "description": "Second requirement",
+      "status": "pending",
+      "verification": "How to verify this is done"
+    }
+  ],
+  "verification_results": {
+    "tests_passing": null,
+    "coverage_percent": null,
+    "lint_clean": null,
+    "build_succeeds": null
+  },
+  "notes": [],
+  "blockers": []
+}

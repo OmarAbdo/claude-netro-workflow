@@ -1,0 +1,32 @@
+{
+  "name": "netro-marketplace",
+  "description": "Universal Claude Code workflow orchestrator with completion enforcement, memory persistence, and plugin bundling",
+  "plugins": [
+    {
+      "name": "netro",
+      "description": "Universal Claude Code workflow orchestrator with completion enforcement, memory persistence, continuous execution, and bundled development plugins (TDD, code review, git workflows).",
+      "version": "1.0.0",
+      "author": "Omar Abdo",
+      "repository": "https://github.com/OmarAbdo/netro",
+      "path": ".",
+      "keywords": [
+        "workflow",
+        "orchestrator",
+        "completion-enforcement",
+        "memory-persistence",
+        "continuous-execution",
+        "tdd",
+        "code-review",
+        "monorepo"
+      ],
+      "features": [
+        "Stop hook blocks incomplete work",
+        "Memory persistence across context windows",
+        "Continuous execution mode",
+        "Bundled TDD, review, and git-pr plugins",
+        "SessionStart context restoration",
+        "PreCompact state saving"
+      ]
+    }
+  ]
+}

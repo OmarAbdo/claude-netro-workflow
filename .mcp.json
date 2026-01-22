@@ -1,0 +1,40 @@
+{
+  "_comment": "MCP servers recommended for the Tafkeer workflow. These are references - actual servers must be configured in your main MCP config.",
+  "recommended": {
+    "linear": {
+      "description": "Linear issue tracking - required for /feature command and issue management",
+      "required": true,
+      "capabilities": [
+        "create_issue",
+        "update_issue",
+        "list_issues",
+        "list_issue_labels",
+        "create_issue_label"
+      ]
+    },
+    "serena": {
+      "description": "Semantic code analysis - enhances type scanning and code understanding",
+      "required": false,
+      "capabilities": [
+        "find_symbol",
+        "get_symbols_overview",
+        "search_for_pattern",
+        "find_referencing_symbols"
+      ]
+    },
+    "github": {
+      "description": "GitHub integration for PR workflows",
+      "required": false,
+      "capabilities": [
+        "create_pull_request",
+        "list_pull_requests",
+        "get_pull_request"
+      ]
+    }
+  },
+  "notes": {
+    "linear_setup": "Run /mcp to authenticate Linear. Required labels will be created automatically.",
+    "serena_setup": "Serena requires project activation. Use activate_project tool after connecting.",
+    "fallback": "Most features work without MCP servers using bash commands as fallback."
+  }
+}

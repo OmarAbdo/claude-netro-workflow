@@ -1,0 +1,59 @@
+{
+  "SessionStart": [
+    {
+      "hooks": [
+        {
+          "type": "prompt",
+          "prompt": "On session start, perform these checks:\n\n1. **Memory Restoration**: Check for saved state:\n   - .claude/memory/session-state.json (project level)\n   - If found, summarize: task, progress (X/Y done), resume instructions\n   - Offer to restore todos from saved progress\n\n2. **Linear Issue Detection**: Check git branch for issue ID (e.g., MYT-123):\n   - If found and Linear MCP available, fetch issue details\n   - Show title, status, labels\n\n3. **Continuous Mode Check**: Check .claude/continuous-mode.json:\n   - If enabled, note that continuous mode is active\n   - Show remaining tasks\n\nRespond with JSON:\n{\"ok\": true, \"context\": \"Summary of restored context, Linear issue, and mode status\"}",
+          "timeout": 20
+        }
+      ]
+    }
+  ],
+  "Stop": [
+    {
+      "hooks": [
+        {
+          "type": "prompt",
+          "prompt": "Before stopping, perform these checks:\n\n1. **Save Memory State**:\n   - Save current progress to .claude/memory/session-state.json\n   - Include: task description, completed/remaining todos, resume instructions\n\n2. **Continuous Mode Check**:\n   - Check if .claude/continuous-mode.json exists and enabled=true\n   - If continuous mode ON and incomplete work exists, respond {\"ok\": false}\n\n3. **Completion Verification** (STRICT):\n   - Were ALL user-requested tasks completed (not partially)?\n   - Are there remaining incomplete todos in TodoWrite?\n   - If tests were requested, did ALL pass?\n   - If coverage specified, was target verified?\n   - If 'ALL' was requested, were all items actually processed?\n\nBe STRICT:\n- 'Most' is not 'all'\n- 'Should work' is not 'verified working'\n- Partial = incomplete\n\nRespond with JSON:\n- {\"ok\": true} ONLY if work is complete AND (continuous mode off OR no work remains)\n- {\"ok\": false, \"reason\": \"[Continuous mode: X tasks remaining] OR [Incomplete: specific items]\"} otherwise",
+          "timeout": 60
+        }
+      ]
+    }
+  ],
+  "PreCompact": [
+    {
+      "hooks": [
+        {
+          "type": "prompt",
+          "prompt": "Context is about to be compacted. CRITICAL: Save state before compaction.\n\n1. **Save to memory**:\n   - Current task description\n   - Progress: completed, in-progress, remaining todos\n   - Key files that were read/modified\n   - Key decisions made\n   - Resume instructions (be specific about next steps)\n\n2. **Format for .claude/memory/session-state.json**\n\n3. **Also save human-readable .claude/memory/task-context.md**\n\nThis ensures work can continue after compaction.\n\nRespond {\"ok\": true} after mentally noting what to save.",
+          "timeout": 30
+        }
+      ]
+    }
+  ],
+  "PostToolUse": [
+    {
+      "matcher": "Bash",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/capture-large-output.py\"",
+          "timeout": 10
+        }
+      ]
+    }
+  ],
+  "PreToolUse": [
+    {
+      "matcher": "TodoWrite",
+      "hooks": [
+        {
+          "type": "prompt",
+          "prompt": "The user expects granular task tracking. Ensure todos are:\n1. Specific and actionable (not vague like 'implement feature')\n2. Cover ALL aspects of the user's request\n3. Include verification steps (run tests, check coverage, etc.)\n4. Broken down into atomic units that can be marked complete individually\n\nIf the current todo list seems incomplete for the user's request, respond {\"ok\": false, \"reason\": \"Missing todos for: X, Y, Z\"}.\n\nRespond {\"ok\": true} if the todos adequately cover the user's requirements.",
+          "timeout": 30
+        }
+      ]
+    }
+  ]
+}

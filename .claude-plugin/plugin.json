@@ -1,0 +1,41 @@
+{
+  "name": "netro",
+  "version": "1.0.0",
+  "description": "Universal Claude Code workflow orchestrator with completion enforcement, memory persistence, continuous execution, and bundled development plugins (TDD, code review, git workflows).",
+  "author": {
+    "name": "Omar Abdo"
+  },
+  "license": "MIT",
+  "keywords": [
+    "workflow",
+    "orchestrator",
+    "monorepo",
+    "typescript",
+    "tdd",
+    "code-review",
+    "memory",
+    "continuous",
+    "completion-enforcement"
+  ],
+  "bundledPlugins": {
+    "_comment": "These plugins are activated together with netro for the complete workflow",
+    "core": [
+      "tdd-workflows@claude-code-workflows",
+      "comprehensive-review@claude-code-workflows",
+      "git-pr-workflows@claude-code-workflows"
+    ],
+    "extended": [
+      "full-stack-orchestration@claude-code-workflows",
+      "error-diagnostics@claude-code-workflows",
+      "security-scanning@claude-code-workflows",
+      "code-refactoring@claude-code-workflows"
+    ],
+    "integrations": [
+      "linear@claude-plugins-official",
+      "serena@claude-plugins-official"
+    ]
+  },
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./.mcp.json",
+  "memory": "./memory/"
+}
