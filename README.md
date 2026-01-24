@@ -16,29 +16,73 @@ A comprehensive Claude Code plugin that provides:
 
 ```bash
 # Add the marketplace
-/plugin marketplace add OmarAbdo/claude-netro-workflow
+claude plugin:add-marketplace OmarAbdo/claude-netro-workflow
 
 # Install netro
-/plugin install netro
+claude plugin:install netro@netro-marketplace
+
+# Enable in settings
+claude config:set enabledPlugins.netro@netro-marketplace true
+```
+
+Or via `/plugin` commands in Claude:
+```
+/plugin:add-marketplace OmarAbdo/claude-netro-workflow
+/plugin:install netro@netro-marketplace
 ```
 
 ### Manual Installation
 
-1. Clone to your plugins directory:
-```bash
-git clone https://github.com/OmarAbdo/claude-netro-workflow.git ~/.claude/plugins/netro
-```
+If marketplace installation doesn't work, follow these steps:
 
-2. Enable in `~/.claude/settings.json`:
+1. Add marketplace to `~/.claude/plugins/known_marketplaces.json`:
 ```json
 {
-  "enabledPlugins": {
-    "netro": true
+  "netro-marketplace": {
+    "source": {
+      "source": "github",
+      "repo": "OmarAbdo/claude-netro-workflow"
+    },
+    "installLocation": "~/.claude/plugins/marketplaces/netro-marketplace",
+    "lastUpdated": "2026-01-24T12:00:00.000Z"
   }
 }
 ```
 
-3. Restart Claude Code
+2. Clone to marketplaces directory:
+```bash
+git clone https://github.com/OmarAbdo/claude-netro-workflow.git ~/.claude/plugins/marketplaces/netro-marketplace
+```
+
+3. Copy to cache:
+```bash
+mkdir -p ~/.claude/plugins/cache/netro-marketplace/netro/1.0.0
+cp -r ~/.claude/plugins/marketplaces/netro-marketplace/plugins/netro/* ~/.claude/plugins/cache/netro-marketplace/netro/1.0.0/
+```
+
+4. Add to `~/.claude/plugins/installed_plugins.json`:
+```json
+{
+  "netro@netro-marketplace": [{
+    "scope": "user",
+    "installPath": "~/.claude/plugins/cache/netro-marketplace/netro/1.0.0",
+    "version": "1.0.0",
+    "installedAt": "2026-01-24T12:00:00.000Z",
+    "lastUpdated": "2026-01-24T12:00:00.000Z"
+  }]
+}
+```
+
+5. Enable in `~/.claude/settings.json`:
+```json
+{
+  "enabledPlugins": {
+    "netro@netro-marketplace": true
+  }
+}
+```
+
+6. Restart Claude Code
 
 ## Key Features
 
