@@ -1,14 +1,27 @@
 {
   "name": "netro-marketplace",
-  "description": "Universal Claude Code workflow orchestrator with completion enforcement, memory persistence, and plugin bundling",
+  "owner": {
+    "name": "Omar Abdo",
+    "email": "omarabdo997@gmail.com",
+    "url": "https://github.com/OmarAbdo"
+  },
+  "metadata": {
+    "description": "Universal Claude Code workflow orchestrator with completion enforcement, memory persistence, and continuous execution",
+    "version": "1.0.0"
+  },
   "plugins": [
     {
       "name": "netro",
+      "source": "./plugins/netro",
       "description": "Universal Claude Code workflow orchestrator with completion enforcement, memory persistence, continuous execution, and bundled development plugins (TDD, code review, git workflows).",
       "version": "1.0.0",
-      "author": "Omar Abdo",
+      "author": {
+        "name": "Omar Abdo",
+        "url": "https://github.com/OmarAbdo"
+      },
+      "homepage": "https://github.com/OmarAbdo/claude-netro-workflow",
       "repository": "https://github.com/OmarAbdo/claude-netro-workflow",
-      "path": ".",
+      "license": "MIT",
       "keywords": [
         "workflow",
         "orchestrator",
@@ -19,13 +32,28 @@
         "code-review",
         "monorepo"
       ],
-      "features": [
-        "Stop hook blocks incomplete work",
-        "Memory persistence across context windows",
-        "Continuous execution mode",
-        "Bundled TDD, review, and git-pr plugins",
-        "SessionStart context restoration",
-        "PreCompact state saving"
+      "category": "workflows",
+      "strict": false,
+      "commands": [
+        "./commands/continuous.md",
+        "./commands/feature.md",
+        "./commands/init-project.md",
+        "./commands/netro-enable.md",
+        "./commands/restore-context.md",
+        "./commands/save-context.md"
+      ],
+      "agents": [
+        "./agents/code-reviewer.md",
+        "./agents/health-check.md"
+      ],
+      "skills": [
+        "./skills/continuous-execution",
+        "./skills/feature-workflow",
+        "./skills/health-check",
+        "./skills/memory-persistence",
+        "./skills/scan-features",
+        "./skills/scan-quality",
+        "./skills/scan-types"
       ]
     }
   ]

@@ -1,4 +1,5 @@
 ---
+name: health-check
 description: Run comprehensive codebase health scan. Detects feature alignment issues, code quality problems, test gaps, type inconsistencies, and design token violations. Use when auditing any codebase.
 tools: Read, Grep, Glob, Bash
 model: haiku
